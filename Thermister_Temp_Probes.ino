@@ -50,7 +50,7 @@ void loop(void) {
   p0_last = p0;
 
   // Probe1
-  p1 = readTempProbe(PROBE0);
+  p1 = readTempProbe(PROBE1);
 
   if (p1_last == p1) {
     p1_count++;
