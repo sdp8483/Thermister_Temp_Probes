@@ -43,6 +43,8 @@ void loop(void) {
     p0_count++;
   } else {
     p0_count = 0;
+    lcd.setCursor(5, 0);
+    lcd.print("           ");
   }
 
   p0_last = p0;
@@ -54,6 +56,8 @@ void loop(void) {
     p1_count++;
   } else {
     p1_count = 0;
+    lcd.setCursor(5, 1);
+    lcd.print("           ");
   }
 
   p1_last = p1;
