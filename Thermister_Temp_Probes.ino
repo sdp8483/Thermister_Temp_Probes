@@ -19,6 +19,13 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 // the value of the 'other' resistor
 #define SERIESRESISTOR 20000
 
+int p0 = 0;
+int p0_last = 0;
+unsigned long p0_count = 0;
+int p1 = 0;
+int p1_last = 0;
+unsigned long p1_count = 0;
+
 uint16_t samples[NUMSAMPLES];
 
 void setup(void) {
@@ -30,17 +37,42 @@ void setup(void) {
 
 void loop(void) {
   // Probe0
-  lcd.setCursor(0, 0);
-  lcd.print(readTempProbe(PROBE0));
-  lcd.print((char)223); // degree symbol
-  lcd.print('C');
+  p0 = readTempProbe(PROBE0);
+
+  if (p0_last == p0) {
+    p0_count++;
+  } else {
+    p0_count = 0;
+  }
+
+  p0_last = p0;
 
   // Probe1
-  lcd.setCursor(0, 1);
-  lcd.print(readTempProbe(PROBE1));
+  p1 = readTempProbe(PROBE0);
+
+  if (p1_last == p0) {
+    p1_count++;
+  } else {
+    p1_count = 0;
+  }
+
+  p1_last = p1;
+
+  // display
+
+  lcd.setCursor(0, 0);
+  lcd.print(p0);
   lcd.print((char)223); // degree symbol
   lcd.print('C');
+  lcd.print(' ');
+  lcd.print(p0_count);
 
+  lcd.setCursor(0, 1);
+  lcd.print(p1);
+  lcd.print((char)223); // degree symbol
+  lcd.print('C');
+  lcd.print(' ');
+  lcd.print(p1_count);
 
   delay(1000);
 }
