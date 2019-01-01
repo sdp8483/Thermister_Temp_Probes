@@ -52,7 +52,7 @@ void loop(void) {
   // Probe1
   p1 = readTempProbe(PROBE0);
 
-  if (p1_last == p0) {
+  if (p1_last == p1) {
     p1_count++;
   } else {
     p1_count = 0;
